@@ -25,7 +25,7 @@ To get plugin up and running, follow these steps:
 
    ```ts
    import { lexicalEditor } from "@payloadcms/richtext-lexical";
-   import { TextColorFeature, TextSizeFeature, TextLineHeightFeature } from "payload-lexical-typography";
+   import { TextColorFeature, TextSizeFeature, TextLineHeightFeature, TextClassFeature } from "payload-lexical-typography";
 
    lexicalEditor({
      features: () => {
@@ -34,6 +34,7 @@ To get plugin up and running, follow these steps:
            colors: ["#FFFFFF", "#000000", "#FF0000", "#00FF00", "#0000FF"],
          }),
          TextSizeFeature(),
+         TextClassFeature(),
          TextLineHeightFeature(),
        ];
      },
@@ -157,6 +158,29 @@ To get plugin up and running, follow these steps:
     <td><code>boolean</code></td>
     <td><code>true</code></td>
     <td>By setting this to <code>false</code>, you hide the custom line height input field, limiting users to selecting only from the predefined line height options.</td>
+  </tr>
+</table>
+
+### TextClassFeature
+
+<table style="width: 100%">
+  <tr>
+    <th style="width: 15%">Option</th>
+    <th style="width: 25%">Type</th>
+    <th style="width: 25%">Default</th>
+    <th style="width: 40%">Description</th>
+  </tr>
+  <tr>
+    <td><code>classes</code></td>
+    <td><code>Array&lt;{value: string, label: string}&gt;</code></td>
+    <td><code>[]</code></td>
+    <td>Specifies the class name available in the picker. Each class needs both a display label and CSS value.</td>
+  </tr>
+  <tr>
+    <td><code>scroll</code></td>
+    <td><code>boolean</code></td>
+    <td><code>true</code></td>
+    <td>If <code>true</code>, classes over the first 4 will be accessible via scrolling within a fixed container height. If <code>false</code>, the picker will expand vertically to accommodate all class options.</td>
   </tr>
 </table>
 
