@@ -1,6 +1,6 @@
 {
   "name": "payload-lexical-typography",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "description": "PayloadCMS lexical-editor typography extension plugin",
   "module": "dist/index.mjs",
   "main": "dist/index.cjs",

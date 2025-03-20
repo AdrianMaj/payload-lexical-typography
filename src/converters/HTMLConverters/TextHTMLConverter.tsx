@@ -27,6 +27,11 @@ export const TextHTMLConverter: HTMLConverter<SerializedTextNode> = {
         styles = `${styles} font-size: ${match[1]};`;
       }
 
+      match = /(?:^|;)\s?letter-spacing: ([^;]+)/.exec(node.style);
+      if (match) {
+        styles = `${styles} letter-spacing: ${match[1]};`;
+      }
+
       match = /(?:^|;)\s?line-height: ([^;]+)/.exec(node.style);
       if (match) {
         styles = `${styles} line-height: ${match[1]};`;

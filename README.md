@@ -6,6 +6,7 @@ This plugin extends the default Payload Lexical editor functionality by adding m
 
 - **Text color** - ability to change text color to predefined colors or selected color using color picker.
 - **Font size** - ability to change font size to predefined sizes or custom size using input field.
+- **Letter spacing** - ability to change letter spacing to predefined values or custom value using input field.
 - **Line height** - ability to change line height to predefined values or custom value using input field.
 - **Font family** (coming soon)
 
@@ -25,7 +26,7 @@ To get plugin up and running, follow these steps:
 
    ```ts
    import { lexicalEditor } from "@payloadcms/richtext-lexical";
-   import { TextColorFeature, TextSizeFeature, TextLineHeightFeature, TextClassFeature } from "payload-lexical-typography";
+   import { TextColorFeature, TextSizeFeature, TextLetterSpacingFeature, TextLineHeightFeature, TextClassFeature } from "payload-lexical-typography";
 
    lexicalEditor({
      features: () => {
@@ -35,6 +36,7 @@ To get plugin up and running, follow these steps:
          }),
          TextSizeFeature(),
          TextClassFeature(),
+         TextLetterSpacingFeature(),
          TextLineHeightFeature(),
        ];
      },
@@ -123,6 +125,41 @@ To get plugin up and running, follow these steps:
     <td><code>boolean</code></td>
     <td><code>true</code></td>
     <td>By setting this to <code>false</code>, you hide the custom size input field, limiting users to selecting only from the predefined size options.</td>
+  </tr>
+</table>
+
+### TextLetterSpacingFeature
+
+<table style="width: 100%">
+  <tr>
+    <th style="width: 15%">Option</th>
+    <th style="width: 25%">Type</th>
+    <th style="width: 25%">Default</th>
+    <th style="width: 40%">Description</th>
+  </tr>
+  <tr>
+    <td><code>spacings</code></td>
+    <td><code>Array&lt;{value: string, label: string}&gt;</code></td>
+    <td><code>[]</code></td>
+    <td>Specifies the letter spacing presets available in the letter spacing picker. Each spacing needs both a display label and CSS value.</td>
+  </tr>
+  <tr>
+    <td><code>method</code></td>
+    <td><code>"replace" | "combine"</code></td>
+    <td><code>"replace"</code></td>
+    <td>Determines whether custom spacings replace the defaults (<code>"replace"</code>) or are added to them (<code>"combine"</code>).</td>
+  </tr>
+  <tr>
+    <td><code>scroll</code></td>
+    <td><code>boolean</code></td>
+    <td><code>true</code></td>
+    <td>If <code>true</code>, spacings over the first 4 will be accessible via scrolling within a fixed container height. If <code>false</code>, the picker will expand vertically to accommodate all spacing options.</td>
+  </tr>
+  <tr>
+    <td><code>customSpacing</code></td>
+    <td><code>boolean</code></td>
+    <td><code>true</code></td>
+    <td>By setting this to <code>false</code>, you hide the custom letter spacing input field, limiting users to selecting only from the predefined spacing options.</td>
   </tr>
 </table>
 
