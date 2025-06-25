@@ -1,5 +1,6 @@
 import { type SerializedTextNode } from "@payloadcms/richtext-lexical";
 import { type HTMLConverters } from "@payloadcms/richtext-lexical/html";
+import { type HTMLConverterAsync, type HTMLConvertersAsync } from "@payloadcms/richtext-lexical/html-async";
 import {
   IS_BOLD,
   IS_ITALIC,
@@ -74,4 +75,8 @@ export const TextHTMLConverter: HTMLConverters<SerializedTextNode> = {
 
     return html;
   },
+};
+
+export const TextHTMLConverterAsync: HTMLConvertersAsync<SerializedTextNode> = {
+  text: TextHTMLConverter.text as HTMLConverterAsync<SerializedTextNode>,
 };
