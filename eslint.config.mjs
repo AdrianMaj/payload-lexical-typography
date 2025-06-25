@@ -19,6 +19,8 @@ const peerDependencies = [
   "@payloadcms/richtext-lexical/client",
   "@payloadcms/richtext-lexical/lexical/react/LexicalComposerContext",
   "@payloadcms/richtext-lexical/lexical/selection",
+  "@payloadcms/richtext-lexical/html",
+  "@payloadcms/richtext-lexical/html-async"
 ];
 
 export default [

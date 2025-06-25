@@ -1,4 +1,6 @@
-import { type HTMLConverter } from "@payloadcms/richtext-lexical";
+import { type SerializedTextNode } from "@payloadcms/richtext-lexical";
+import { type HTMLConverters } from "@payloadcms/richtext-lexical/html";
+import { type HTMLConverterAsync, type HTMLConvertersAsync } from "@payloadcms/richtext-lexical/html-async";
 import {
   IS_BOLD,
   IS_ITALIC,
@@ -7,13 +9,12 @@ import {
   IS_CODE,
   IS_SUBSCRIPT,
   IS_SUPERSCRIPT,
-  type SerializedTextNode,
 } from "@payloadcms/richtext-lexical/lexical";
 
 import escapeHTML from "escape-html";
 
-export const TextHTMLConverter: HTMLConverter<SerializedTextNode> = {
-  converter({ node }) {
+export const TextHTMLConverter: HTMLConverters<SerializedTextNode> = {
+  text: ({ node }) => {
     let styles = "";
 
     if (node.style) {
@@ -36,7 +37,7 @@ export const TextHTMLConverter: HTMLConverter<SerializedTextNode> = {
       if (match) {
         styles = `${styles} line-height: ${match[1]};`;
       }
-      
+
       match = /(?:^|;)\s?font-family: ([^;]+)/.exec(node.style);
       if (match) {
         styles = `${styles} font-family: ${match[1]};`;
@@ -74,5 +75,8 @@ export const TextHTMLConverter: HTMLConverter<SerializedTextNode> = {
 
     return html;
   },
-  nodeTypes: ["text"],
+};
+
+export const TextHTMLConverterAsync: HTMLConvertersAsync<SerializedTextNode> = {
+  text: TextHTMLConverter.text as HTMLConverterAsync<SerializedTextNode>,
 };
