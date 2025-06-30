@@ -20,14 +20,18 @@ const injectStyles = () => {
 
 export const TextColorPicker = ({
   color,
+  applyColor,
   onChange,
   colors = [],
   hideAttribution = false,
   colorPicker = true,
   listView,
+  handleReset,
 }: {
   color: string;
+  applyColor: (color?: string) => void;
   onChange: (color: string) => void;
+  handleReset: () => void;
 } & TextColorFeatureProps) => {
   const { containerProps, inputProps } = usePreventInlineToolbarClose();
   const [predefinedColors, setPredefinedColors] = useState(true);
@@ -112,7 +116,9 @@ export const TextColorPicker = ({
             return (
               <button
                 key={c}
-                onClick={() => onChange(c)}
+                onClick={() => {
+                  applyColor(c);
+                }}
                 style={{
                   display: "flex",
                   gap: isGridView ? "4px" : "6px",
@@ -140,7 +146,7 @@ export const TextColorPicker = ({
             );
           })}
           <button
-            onClick={() => onChange("")}
+            onClick={() => handleReset()}
             style={{
               display: "flex",
               gap: isGridView ? "4px" : "6px",
@@ -174,6 +180,32 @@ export const TextColorPicker = ({
               />
             </div>
             {!isGridView && <span>Reset</span>}
+          </button>
+        </div>
+      )}
+      {!predefinedColors && (
+        <div style={{ display: "flex", gap: "8px" }}>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              handleReset();
+            }}
+            className="btn btn--icon-style-without-border btn--size-small btn--withoutPopup btn--style-pill btn--withoutPopup"
+            style={{ marginLeft: "auto", margin: "0", cursor: "pointer", flex: 1 }}
+          >
+            Reset
+          </button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              applyColor();
+            }}
+            className="btn btn--icon-style-without-border btn--size-small btn--withoutPopup btn--style-pill btn--withoutPopup"
+            style={{ marginLeft: "auto", margin: "0", cursor: "pointer", flex: 1 }}
+          >
+            Apply
           </button>
         </div>
       )}

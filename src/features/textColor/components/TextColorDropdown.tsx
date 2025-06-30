@@ -10,8 +10,16 @@ export const TextColorDropdown = ({ editor, item }: { editor: LexicalEditor; ite
   const [activeColor, setActiveColor] = useState<string>("");
 
   const onChange = (color: string) => {
-    editor.dispatchCommand(item.command, { color });
     setActiveColor(color || "");
+  };
+
+  const applyColor = (color?: string) => {
+    editor.dispatchCommand(item.command, { color: color ?? activeColor });
+  };
+
+  const handleReset = () => {
+    editor.dispatchCommand(item.command, { color: "" });
+    setActiveColor("");
   };
 
   useEffect(() => {
@@ -24,11 +32,13 @@ export const TextColorDropdown = ({ editor, item }: { editor: LexicalEditor; ite
   return (
     <TextColorPicker
       color={activeColor}
+      applyColor={applyColor}
       onChange={onChange}
       colors={item.colors}
       hideAttribution={item.hideAttribution}
       colorPicker={item.colorPicker}
       listView={item.listView}
+      handleReset={handleReset}
     />
   );
 };
