@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, type ChangeEvent } from "react";
 
+import { usePreventInlineToolbarClose } from "../../../utils/usePreventInlineToolbarClose";
 import { type TextLetterSpacingFeatureProps } from "../feature.client";
 
 export const SpacingPicker = ({
@@ -14,6 +15,7 @@ export const SpacingPicker = ({
   spacing: string;
   onChange: (spacing: string) => void;
 } & TextLetterSpacingFeatureProps) => {
+  const { containerProps, inputProps } = usePreventInlineToolbarClose();
   const isEditingRef = useRef(false);
 
   // Tailwind spacing values
@@ -130,6 +132,7 @@ export const SpacingPicker = ({
 
   return (
     <div
+      {...containerProps}
       style={{
         padding: "8px",
         display: "flex",
@@ -207,6 +210,7 @@ export const SpacingPicker = ({
                 value={customNumberValue}
                 onChange={handleCustomNumberChange}
                 onClick={(e) => e.stopPropagation()}
+                {...inputProps}
               />
             </div>
             <select

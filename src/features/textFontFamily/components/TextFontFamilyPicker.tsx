@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, type ChangeEvent } from "react";
 
+import { usePreventInlineToolbarClose } from "../../../utils/usePreventInlineToolbarClose";
 import { type TextFontFamilyFeatureProps } from "../feature.client";
 
 export const FontFamilyPicker = ({
@@ -14,6 +15,7 @@ export const FontFamilyPicker = ({
   fontFamily: string;
   onChange: (fontFamily: string) => void;
 } & TextFontFamilyFeatureProps) => {
+  const { containerProps, inputProps } = usePreventInlineToolbarClose();
   const isEditingRef = useRef(false);
 
   const defaultFontFamilyOptions = [
@@ -88,6 +90,7 @@ export const FontFamilyPicker = ({
 
   return (
     <div
+      {...containerProps}
       style={{
         padding: "8px",
         display: "flex",
@@ -161,6 +164,7 @@ export const FontFamilyPicker = ({
                 onChange={handleCustomFontFamilyChange}
                 onClick={(e) => e.stopPropagation()}
                 placeholder="e.g. Arial, sans-serif"
+                {...inputProps}
               />
             </div>
           </div>

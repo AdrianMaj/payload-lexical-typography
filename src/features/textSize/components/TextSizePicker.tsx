@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, type ChangeEvent } from "react";
 
+import { usePreventInlineToolbarClose } from "../../../utils/usePreventInlineToolbarClose";
 import { type TextSizeFeatureProps } from "../feature.client";
 
 export const SizePicker = ({
@@ -15,6 +16,7 @@ export const SizePicker = ({
   onChange: (size: string) => void;
 } & TextSizeFeatureProps) => {
   const isEditingRef = useRef(false);
+  const { containerProps, inputProps } = usePreventInlineToolbarClose();
 
   const defaultSizeOptions = [
     { value: "0.875rem", label: "Small" },
@@ -122,6 +124,7 @@ export const SizePicker = ({
 
   return (
     <div
+      {...containerProps}
       style={{
         padding: "8px",
         display: "flex",
@@ -198,6 +201,7 @@ export const SizePicker = ({
                 value={customNumberValue}
                 onChange={handleCustomNumberChange}
                 onClick={(e) => e.stopPropagation()}
+                {...inputProps}
               />
             </div>
             <select

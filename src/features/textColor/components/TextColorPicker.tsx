@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { HexColorPicker } from "react-colorful";
 
+import { usePreventInlineToolbarClose } from "../../../utils/usePreventInlineToolbarClose";
 import { type TextColorFeatureProps } from "../feature.client";
 
 const injectStyles = () => {
@@ -28,6 +29,7 @@ export const TextColorPicker = ({
   color: string;
   onChange: (color: string) => void;
 } & TextColorFeatureProps) => {
+  const { containerProps, inputProps } = usePreventInlineToolbarClose();
   const [predefinedColors, setPredefinedColors] = useState(true);
 
   useEffect(() => {
@@ -38,6 +40,7 @@ export const TextColorPicker = ({
 
   return (
     <div
+      {...containerProps}
       style={{
         display: "flex",
         flexDirection: "column",
@@ -88,6 +91,7 @@ export const TextColorPicker = ({
                 e.stopPropagation();
                 onChange(e.target.value);
               }}
+              {...inputProps}
             />
           </div>
         </div>
@@ -106,7 +110,7 @@ export const TextColorPicker = ({
           {colors.map((unionC) => {
             const c = typeof unionC === "string" ? unionC : unionC.value;
             return (
-              <div
+              <button
                 key={c}
                 onClick={() => onChange(c)}
                 style={{
@@ -114,6 +118,9 @@ export const TextColorPicker = ({
                   gap: isGridView ? "4px" : "6px",
                   alignItems: "center",
                   cursor: "pointer",
+                  background: "transparent",
+                  border: "none",
+                  padding: "0",
                 }}
               >
                 <div
@@ -129,20 +136,22 @@ export const TextColorPicker = ({
                   }}
                 />
                 {!isGridView && <span>{typeof unionC === "string" ? unionC : unionC.label}</span>}
-              </div>
+              </button>
             );
           })}
-          <div
+          <button
             onClick={() => onChange("")}
             style={{
               display: "flex",
               gap: isGridView ? "4px" : "6px",
               alignItems: "center",
               cursor: "pointer",
+              background: "transparent",
+              border: "none",
+              padding: "0",
             }}
           >
             <div
-              onClick={() => onChange("")}
               style={{
                 width: "26px",
                 height: "26px",
@@ -165,7 +174,7 @@ export const TextColorPicker = ({
               />
             </div>
             {!isGridView && <span>Reset</span>}
-          </div>
+          </button>
         </div>
       )}
       <div

@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef, type ChangeEvent } from "react";
 
+import { usePreventInlineToolbarClose } from "../../../utils/usePreventInlineToolbarClose";
+
 import type { TextLineHeightFeatureProps } from "../feature.client";
 
 export const TextLineHeightPicker = ({
@@ -14,6 +16,8 @@ export const TextLineHeightPicker = ({
   currentValue: string;
   onChange: (lineHeight: string) => void;
 } & TextLineHeightFeatureProps) => {
+  const { containerProps, inputProps } = usePreventInlineToolbarClose();
+
   const isEditingRef = useRef(false);
 
   const defaultLineHeights = [
@@ -132,6 +136,7 @@ export const TextLineHeightPicker = ({
 
   return (
     <div
+      {...containerProps}
       style={{
         padding: "8px",
         display: "flex",
@@ -209,6 +214,7 @@ export const TextLineHeightPicker = ({
                 value={customNumberValue}
                 onChange={handleCustomNumberChange}
                 onClick={(e) => e.stopPropagation()}
+                {...inputProps}
               />
             </div>
             <select
