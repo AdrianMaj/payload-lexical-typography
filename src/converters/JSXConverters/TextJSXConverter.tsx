@@ -23,10 +23,10 @@ export const TextJSXConverter: JSXConverters<SerializedTextNode> = {
 
       match = /(?:^|;)\s?letter-spacing: ([^;]+)/.exec(node.style);
       if (match) styles.letterSpacing = match[1];
-      
+
       match = /(?:^|;)\s?line-height: ([^;]+)/.exec(node.style);
       if (match) styles.lineHeight = match[1];
-      
+
       match = /(?:^|;)\s?font-family: ([^;]+)/.exec(node.style);
       if (match) styles.fontFamily = match[1];
     }
@@ -41,7 +41,8 @@ export const TextJSXConverter: JSXConverters<SerializedTextNode> = {
       [IS_SUPERSCRIPT]: (el) => <sup>{el}</sup>,
     };
 
-    let textElement = <span style={styles}>{node.text}</span>;
+    let textElement =
+      Object.keys(styles).length > 0 ? <span style={styles}>{node.text}</span> : <>{node.text}</>;
 
     Object.entries(formatters).forEach(([formatFlag, formatter]) => {
       if (node.format & Number(formatFlag)) {
