@@ -11,28 +11,28 @@ export const TextLineHeightIcon = () => {
     >
       <path
         d="M5.3335 26.6667H26.6668"
-        stroke="white"
+        stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M5.3335 3H26.6668"
-        stroke="white"
+        stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M9 22L16 8L23 22"
-        stroke="white"
+        stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M10.9995 17.9998H20.9995"
-        stroke="white"
+        stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
